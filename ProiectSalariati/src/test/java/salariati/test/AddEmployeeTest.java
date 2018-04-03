@@ -33,11 +33,41 @@ public class AddEmployeeTest {
 	
 	@Test
 	public void testAddNewEmployee() {
-		Employee newEmployee = new Employee("ValidLastName", "1910509055057", DidacticFunction.ASISTENT, "3000");
+		Employee newEmployee = new Employee("ValidLastName", "1910509055057", DidacticFunction.ASISTENT, 3000.0);
 		assertTrue(employeeValidator.isValid(newEmployee));
 		controller.addEmployee(newEmployee);
 		assertEquals(7, controller.getEmployeesList().size());
 		assertTrue(newEmployee.equals(controller.getEmployeesList().get(controller.getEmployeesList().size() - 1)));
+	}
+
+	@Test
+	public void testAddNewEmployeeFailValidateName() {
+		Employee newEmployee = new Employee("", "1910509055057", DidacticFunction.ASISTENT, 3000.0);
+		assertFalse(employeeValidator.isValid(newEmployee));
+	}
+
+	@Test
+	public void testAddNewEmployeeFailValidateCnp() {
+		Employee newEmployee = new Employee("ValidLastName", "", DidacticFunction.ASISTENT, 3000.0);
+		assertFalse(employeeValidator.isValid(newEmployee));
+	}
+
+	@Test
+	public void testAddNewEmployeeFailValidateSalary() {
+		Employee newEmployee = new Employee("ValidLastName", "1910509055057", DidacticFunction.ASISTENT, 0.0);
+		assertFalse(employeeValidator.isValid(newEmployee));
+	}
+
+	@Test
+	public void testAddNewEmployeeFailValidateSalaryAndName() {
+		Employee newEmployee = new Employee("", "1910509055057", DidacticFunction.ASISTENT, 0.0);
+		assertFalse(employeeValidator.isValid(newEmployee));
+	}
+
+	@Test
+	public void testAddNewEmployeeFailValidateSalaryAndCnp() {
+		Employee newEmployee = new Employee("ValidLastName", "", DidacticFunction.ASISTENT, 0.0);
+		assertFalse(employeeValidator.isValid(newEmployee));
 	}
 
 }

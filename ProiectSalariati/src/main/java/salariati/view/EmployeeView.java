@@ -109,7 +109,7 @@ public class EmployeeView {
         System.out.println("Salary: ");
         String salary = in.next();
 
-        Employee employee = new Employee(username, cnp, didacticFunction, salary);
+        Employee employee = new Employee(username, cnp, didacticFunction, Double.parseDouble(salary));
         employeeController.addEmployee(employee);
         System.out.println("Employee was successfully saved.");
         menu();

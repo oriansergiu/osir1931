@@ -19,12 +19,12 @@ public class EmployeeMock implements EmployeeRepositoryInterface {
 		employeeValidator = new EmployeeValidator();
 		employeeList = new ArrayList<Employee>();
 		
-		Employee Ionel   = new Employee("Pacuraru", "1234567890876", DidacticFunction.ASISTENT, "2500");
-		Employee Mihai   = new Employee("Dumitrescu", "1234567890876", DidacticFunction.LECTURER, "3000");
-		Employee Ionela  = new Employee("Ionescu", "1234567890876", DidacticFunction.LECTURER, "3200");
-		Employee Mihaela = new Employee("Pacuraru", "1234567890876", DidacticFunction.ASISTENT, "1500");
-		Employee Vasile  = new Employee("Georgescu", "1234567890876", DidacticFunction.TEACHER,  "2200");
-		Employee Marin   = new Employee("Puscas", "1234567890876", DidacticFunction.TEACHER,  "2100");
+		Employee Ionel   = new Employee("Pacuraru", "1234567890876", DidacticFunction.ASISTENT, 2500.0);
+		Employee Mihai   = new Employee("Dumitrescu", "1234567890876", DidacticFunction.LECTURER, 3000.0);
+		Employee Ionela  = new Employee("Ionescu", "1234567890876", DidacticFunction.LECTURER, 3200.0);
+		Employee Mihaela = new Employee("Pacuraru", "1234567890876", DidacticFunction.ASISTENT, 1500.0);
+		Employee Vasile  = new Employee("Georgescu", "1234567890876", DidacticFunction.TEACHER,  2200.0);
+		Employee Marin   = new Employee("Puscas", "1234567890876", DidacticFunction.TEACHER,  2100.0);
 		
 		employeeList.add( Ionel );
 		employeeList.add( Mihai );

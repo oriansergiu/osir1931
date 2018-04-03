@@ -16,7 +16,7 @@ public class EmployeeFieldsTest {
 	@Before
 	public void setUp() {
 		employeeValidator = new EmployeeValidator();
-		employee = new Employee("Ardelean", "1234567891234", DidacticFunction.ASISTENT, "1234");
+		employee = new Employee("Ardelean", "1234567891234", DidacticFunction.ASISTENT, 1234.0);
 	}
 	
 	@Test
@@ -55,19 +55,19 @@ public class EmployeeFieldsTest {
 	@Test
 	public void testValidSalary() {
 		assertTrue(employeeValidator.isValid(employee));
-		employee.setSalary("1500");
+		employee.setSalary(1500.0);
 		assertTrue(employeeValidator.isValid(employee));
 	}
 	
 	@Test
 	public void testInvalidSalary() {
-		employee.setSalary("asdf");
+//		employee.setSalary(asdf");
 		assertFalse(employeeValidator.isValid(employee));
-		employee.setSalary("123v");
+//		employee.setSalary("123v");
 		assertFalse(employeeValidator.isValid(employee));
-		employee.setSalary("");
+		employee.setSalary(0.0);
 		assertFalse(employeeValidator.isValid(employee));
-		employee.setSalary("0");
+//		employee.setSalary("0");
 		assertFalse(employeeValidator.isValid(employee));
 	}
 

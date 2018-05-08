@@ -33,14 +33,16 @@ public class EmployeeController {
     public Employee findByName(String employeeName) throws EmployeeException {
         List<Employee> employeeList = getEmployeesList();
 
-        for (Employee employee :
-                employeeList) {
-            if (employee.getLastName().equals(employeeName)) {
-                return employee;
+        int employee = 0;
+              while(employee < employeeList.size()) {
+                   if (employeeList.get(employee).getLastName()
+                    .equals(employeeName)) {
+                              return employeeList.get(employee);
             }
+                   employee++;
         }
 
-        throw new EmployeeException("The username is incorrect.");
+        throw new EmployeeException("The username doesn't exist.");
     }
 
     public void update(Employee employee) {

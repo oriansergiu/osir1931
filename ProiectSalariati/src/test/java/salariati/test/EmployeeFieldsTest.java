@@ -1,10 +1,15 @@
 package salariati.test;
 
 import static org.junit.Assert.*;
+
+import salariati.controller.EmployeeController;
+import salariati.exception.EmployeeException;
 import salariati.model.Employee;
 
 import org.junit.*;
 
+import salariati.repository.implementations.EmployeeImpl;
+import salariati.repository.interfaces.EmployeeRepositoryInterface;
 import salariati.validator.EmployeeValidator;
 import salariati.enumeration.DidacticFunction;
 
@@ -12,9 +17,12 @@ public class EmployeeFieldsTest {
 
 	private EmployeeValidator employeeValidator;
 	private Employee employee;
+	private EmployeeController employeeController;
 	
 	@Before
 	public void setUp() {
+		EmployeeRepositoryInterface repo = new EmployeeImpl();
+		employeeController = new EmployeeController(repo);
 		employeeValidator = new EmployeeValidator();
 		employee = new Employee("Ardelean", "1234567891234", DidacticFunction.ASISTENT, 1234.0);
 	}
@@ -39,36 +47,29 @@ public class EmployeeFieldsTest {
 		employee.setCnp("1910509055057");
 		assertTrue(employeeValidator.isValid(employee));
 	}
-	
-	@Test
-	public void testInvalidCNP() {
-		employee.setCnp("123456789123");
-		assertFalse(employeeValidator.isValid(employee));
-		employee.setCnp("12345678912345");
-		assertFalse(employeeValidator.isValid(employee));
-		employee.setCnp("123asd456yuio");
-		assertFalse(employeeValidator.isValid(employee));
-		employee.setCnp("ty1234s,.t");
-		assertFalse(employeeValidator.isValid(employee));
-	}
-	
 	@Test
 	public void testValidSalary() {
 		assertTrue(employeeValidator.isValid(employee));
 		employee.setSalary(1500.0);
 		assertTrue(employeeValidator.isValid(employee));
 	}
-	
+
 	@Test
-	public void testInvalidSalary() {
-//		employee.setSalary(asdf");
-		assertFalse(employeeValidator.isValid(employee));
-//		employee.setSalary("123v");
-		assertFalse(employeeValidator.isValid(employee));
-		employee.setSalary(0.0);
-		assertFalse(employeeValidator.isValid(employee));
-//		employee.setSalary("0");
-		assertFalse(employeeValidator.isValid(employee));
+	public void testFindByName(){
+		employeeController.addEmployee(employee);
+
+		try {
+			assertEquals(employeeController.findByName("Ardelean").getCnp(), employee.getCnp());
+		} catch (EmployeeException e) {
+			e.printStackTrace();
+		}
+		try {
+			assertNull(employeeController.findByName("Popescu").getCnp());
+		} catch (EmployeeException e) {
+			assertTrue(true);
+		}
+
 	}
+
 
 }
